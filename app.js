@@ -49,7 +49,7 @@ app.post("/getPostList", async function(req, res){
     let resultData = {};
     let resultMsg = "Success";
 
-    if(postCollectionList !== undefined){
+    if(postCollectionList !== ""){
         postCollectionList.forEach((curData) => {
             postCount++;
             let postData = {
