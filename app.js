@@ -27,27 +27,46 @@ app.get("/", function(req, res){
 
 app.post("/getPostList", async function(req, res){
     let {postType} = req.body;
-    let postListCollection = "";
+    let postCollection = "";
 
     switch(postType){
         case "blog":
-            postListCollection = "Blog Post";
+            postCollection = "Blog Post";
             break;
         case "project":
-            postListCollection = "Project Post";
+            postCollection = "Project Post";
             break;
         case "solving":
-            postListCollection = "Solving Post";
+            postCollection = "Solving Post";
             break;
     }
 
-    let postList = await getDocs(collection(firestoreDB, postListCollection));
+    let postCollectionList = await getDocs(collection(firestoreDB, postCollection));
+    let postCount = 0;
+    let postList = [];
 
-    if(postList !== undefined){
-        postList.forEach((postData) => {
-            console.log(postData.id, " => ", postData.get("title"));
+    let resultCode = 200;
+    let resultData = {};
+
+    if(postCollectionList !== undefined){
+        postCollectionList.forEach((curData) => {
+            postCount++;
+            postData = {
+                "postDate": curData.get("date"),
+                "postIsPinned": curData.get("isPinned"),
+                "postTag": curData.get("tag"),
+                "postTitle": curData.get("title"),
+                "postURL": curData.get("url"),
+            };
+            postList.append(postData);
         });
-        res.send("Check Console Log!");
+
+        resultData.RESULT_CODE = resultCode;
+        resultData.RESULT_DATA = {
+            PostCount: postCount,
+            PostList: postList
+        };
+        res.send(resultData);
     }else{
         res.send("No Such Post Type");
     }
