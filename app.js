@@ -24,11 +24,31 @@ app.get("/", function(req, res){
 });
 
 app.get("/getPostList", async function(req, res){
-    const blogPostList = await getDocs(collection(firestoreDB, "Blog Post"));
-    blogPostList.forEach((postData) => {
-        console.log(postData.id, " => ", postData.get("title"));
-    });
-    res.send("Check Console Log!");
+    let {postType} = req.body;
+    let postList;
+
+    switch(postType){
+        case "blog":
+            postList = await getDocs(collection(firestoreDB, "Blog Post"));
+            break;
+        case "project":
+            postList = await getDocs(collection(firestoreDB, "Project Post"));
+            break;
+        case "solving":
+            postList = await getDocs(collection(firestoreDB, "Solving Post"));
+            break;
+    }
+
+    if(postList !== undefined){
+        postList.forEach((postData) => {
+            console.log(postData.id, " => ", postData.get("title"));
+        });
+        res.send("Check Console Log!");
+    }else{
+        res.send("No Such Post Type");
+    }
+    
+    
 });
 
 server.listen(8080, "0.0.0.0", function(){
