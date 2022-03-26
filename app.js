@@ -23,7 +23,7 @@ app.get("/", function(req, res){
     res.redirect("https://dev-lr.com");
 });
 
-app.get("/getPostList", async function(req, res){
+app.post("/getPostList", async function(req, res){
     let {postType} = req.body;
     let postList;
 
