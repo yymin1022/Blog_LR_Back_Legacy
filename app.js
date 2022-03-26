@@ -58,7 +58,7 @@ app.post("/getPostList", async function(req, res){
                 "postTitle": curData.get("title"),
                 "postURL": curData.get("url"),
             };
-            postList.append(postData);
+            postList.push(postData);
         });
 
         resultData.RESULT_CODE = resultCode;
