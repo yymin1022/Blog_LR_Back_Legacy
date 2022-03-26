@@ -27,7 +27,7 @@ app.get("/getPostList", function(req, res){
     const blogPostRef = doc(firestoreDB, "Blog Post", "1");
     const blogPost = getDoc(blogPostRef);
 
-    if (docSnap.exists()) {
+    if (blogPost.exists()) {
         res.send("Document data : " + blogPost.data());
     }else{
         res.send("No such document");
