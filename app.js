@@ -25,7 +25,7 @@ app.get("/", function(req, res){
 
 app.post("/getPostList", async function(req, res){
     let {postType} = req.body;
-    let postList;
+    let postList = "Loading";
 
     switch(postType){
         case "blog":
@@ -39,7 +39,7 @@ app.post("/getPostList", async function(req, res){
             break;
     }
 
-    if(postList !== undefined){
+    if(postList !== "Loading"){
         postList.forEach((postData) => {
             console.log(postData.id, " => ", postData.get("title"));
         });
