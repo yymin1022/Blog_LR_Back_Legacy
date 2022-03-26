@@ -51,7 +51,7 @@ app.post("/getPostList", async function(req, res){
     if(postCollectionList !== undefined){
         postCollectionList.forEach((curData) => {
             postCount++;
-            postData = {
+            let postData = {
                 "postDate": curData.get("date"),
                 "postIsPinned": curData.get("isPinned"),
                 "postTag": curData.get("tag"),
