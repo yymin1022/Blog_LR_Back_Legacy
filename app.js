@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import express from "express";
 import http from "http";
@@ -8,6 +7,8 @@ import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore
 
 var app = express();
 var server = http.createServer(app);
+app.use(express.json());
+app.use(express.urlencoded({extended : false}));
 
 dotenv.config();
 
