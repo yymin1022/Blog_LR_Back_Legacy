@@ -39,7 +39,7 @@ app.post("/getPostList", async function(req, res){
             break;
     }
 
-    if(postList !== undefined"){
+    if(postList !== undefined){
         postList.forEach((postData) => {
             console.log(postData.id, " => ", postData.get("title"));
         });
