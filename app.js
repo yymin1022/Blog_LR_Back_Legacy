@@ -26,8 +26,6 @@ app.get("/", function(req, res){
 });
 
 app.post("/getPostList", async function(req, res){
-    console.log("DATA : " + req.body);
-
     let {postType} = req.body;
     let postListCollection = "";
 
