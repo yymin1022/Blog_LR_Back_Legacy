@@ -24,11 +24,12 @@ app.get("/", function(req, res){
 });
 
 app.get("/getPostList", async function(req, res){
-    const blogPostRef = doc(firestoreDB, "Blog Post", "1");
-    const blogPost = await getDoc(blogPostRef);
-
     if (blogPost.exists()) {
-        res.send("Document data : " + blogPost.data());
+        const blogPostList = await getDocs(collection(firestoreDB, "Blog Post"));
+        blogPostList.forEach((postData) => {
+            console.log(postData.id, " => ", postData.data());
+        });
+        res.send("Check Console Log!");
     }else{
         res.send("No such document");
     }
