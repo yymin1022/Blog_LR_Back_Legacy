@@ -3,7 +3,7 @@ import express from "express";
 import http from "http";
 
 import {initializeApp} from "firebase/app";
-import {doc, getDoc, getFirestore} from "firebase/firestore";
+import {doc, getDoc, getDocs, getFirestore} from "firebase/firestore";
 
 var app = express();
 var server = http.createServer(app);
