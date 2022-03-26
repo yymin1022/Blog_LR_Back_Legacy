@@ -24,8 +24,8 @@ app.get("/", function(req, res){
 });
 
 app.get("/getPostList", async function(req, res){
-    if (blogPost.exists()) {
-        const blogPostList = await getDocs(collection(firestoreDB, "Blog Post"));
+    const blogPostList = await getDocs(collection(firestoreDB, "Blog Post"));
+    if (blogPostList.exists()) {
         blogPostList.forEach((postData) => {
             console.log(postData.id, " => ", postData.data());
         });
