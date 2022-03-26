@@ -1,8 +1,9 @@
+import {express} from "express";
+import {http} from "http";
+
 import {initializeApp} from "firebase/app";
 import {doc, getDoc, getFirestore} from "firebase/firestore";
 
-var express = require("express");
-var http = require("http");
 var app = express();
 var server = http.createServer(app);
 
