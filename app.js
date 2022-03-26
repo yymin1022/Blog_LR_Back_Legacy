@@ -3,6 +3,8 @@ var http = require("http");
 var app = express();
 var server = http.createServer(app);
 
+require('dotenv').config();
+
 app.get("/", function(req, res){
     res.redirect("https://dev-lr.com");
 });
