@@ -41,7 +41,6 @@ app.post("/getPostList", async function(req, res){
             break;
     }
 
-    let postCollectionList = await getDocs(collection(firestoreDB, postCollection));
     let postCount = 0;
     let postList = [];
 
@@ -49,7 +48,8 @@ app.post("/getPostList", async function(req, res){
     let resultData = {};
     let resultMsg = "Success";
 
-    if(postCollectionList !== ""){
+    if(postCollection !== ""){
+        let postCollectionList = await getDocs(collection(firestoreDB, postCollection));
         postCollectionList.forEach((curData) => {
             postCount++;
             let postData = {
