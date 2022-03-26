@@ -26,7 +26,7 @@ app.get("/", function(req, res){
 app.get("/getPostList", async function(req, res){
     const blogPostList = await getDocs(collection(firestoreDB, "Blog Post"));
     blogPostList.forEach((postData) => {
-        console.log(postData.id, " => ", postData.data());
+        console.log(postData.id, " => ", postData.get("title"));
     });
     res.send("Check Console Log!");
 });
