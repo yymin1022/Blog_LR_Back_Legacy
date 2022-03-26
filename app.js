@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express from "express";
 import http from "http";
 
@@ -7,7 +8,7 @@ import {doc, getDoc, getFirestore} from "firebase/firestore";
 var app = express();
 var server = http.createServer(app);
 
-require('dotenv').config();
+dotenv.config();
 
 const firebaseConfig = {
     apiKey: process.env.FB_API_KEY,
