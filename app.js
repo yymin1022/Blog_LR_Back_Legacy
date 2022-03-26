@@ -47,6 +47,7 @@ app.post("/getPostList", async function(req, res){
 
     let resultCode = 200;
     let resultData = {};
+    let resultMsg = "Success";
 
     if(postCollectionList !== undefined){
         postCollectionList.forEach((curData) => {
@@ -60,18 +61,18 @@ app.post("/getPostList", async function(req, res){
             };
             postList.push(postData);
         });
-
-        resultData.RESULT_CODE = resultCode;
-        resultData.RESULT_DATA = {
-            PostCount: postCount,
-            PostList: postList
-        };
-        res.send(resultData);
     }else{
-        res.send("No Such Post Type");
+        resultCode = 100;
+        resultMsg = "An Error has Occurred";
     }
     
-    
+    resultData.RESULT_CODE = resultCode;
+    resultData.RESULT_MSG = resultMsg;
+    resultData.RESULT_DATA = {
+        PostCount: postCount,
+        PostList: postList
+    };
+    res.send(resultData);
 });
 
 server.listen(8080, "0.0.0.0", function(){
