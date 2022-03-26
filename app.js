@@ -1,3 +1,4 @@
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import express from "express";
 import http from "http";
@@ -24,7 +25,7 @@ app.get("/", function(req, res){
 });
 
 app.post("/getPostList", async function(req, res){
-    let {postType} = req.body;
+    let postType = req.body.postType;
     let postList = {};
 
     switch(postType){
