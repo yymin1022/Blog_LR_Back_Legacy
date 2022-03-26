@@ -1,5 +1,5 @@
-import {express} from "express";
-import {http} from "http";
+import express from "express";
+import http from "http";
 
 import {initializeApp} from "firebase/app";
 import {doc, getDoc, getFirestore} from "firebase/firestore";
