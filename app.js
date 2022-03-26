@@ -54,6 +54,7 @@ app.post("/getPostList", async function(req, res){
             postCount++;
             let postData = {
                 "postDate": curData.get("date"),
+                "postID": curData.id,
                 "postIsPinned": curData.get("isPinned"),
                 "postTag": curData.get("tag"),
                 "postTitle": curData.get("title"),
