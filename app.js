@@ -25,7 +25,9 @@ app.get("/", function(req, res){
 });
 
 app.post("/getPostList", async function(req, res){
-    let postType = req.body.postType;
+    console.log("DATA : " + req.body);
+
+    let postType = "blog";
     let postList = {};
 
     switch(postType){
