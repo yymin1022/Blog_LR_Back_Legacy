@@ -74,6 +74,12 @@ app.post("/getPostList", async function(req, res){
     res.send(resultData);
 });
 
+app.post("/getPostById", function(req, res){
+    let postID = req.body.postID;
+
+    res.send(postID);
+});
+
 server.listen(8080, "0.0.0.0", function(){
     console.log("Server listen on port " + server.address().port);
 });
