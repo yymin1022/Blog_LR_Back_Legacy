@@ -5,11 +5,10 @@ import http from "http";
 import {initializeApp} from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore";
 
-var app = express();
-var server = http.createServer(app);
+let app = express();
+let server = http.createServer(app);
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
-
 dotenv.config();
 
 const firebaseConfig = {
@@ -26,8 +25,10 @@ app.get("/", function(req, res){
 });
 
 app.post("/getPostList", async function(req, res){
-    let {postType} = req.body;
     let postCollection = "";
+    let postCount = 0;
+    let postList = [];
+    let postType = req.body.postType;
 
     switch(postType){
         case "blog":
@@ -40,9 +41,6 @@ app.post("/getPostList", async function(req, res){
             postCollection = "Solving Post";
             break;
     }
-
-    let postCount = 0;
-    let postList = [];
 
     let resultCode = 200;
     let resultData = {};
