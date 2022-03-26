@@ -23,7 +23,7 @@ app.get("/", function(req, res){
 
 app.get("/getPostList", function(req, res){
     const blogPostRef = doc(firestoreDB, "Blog Post", "1");
-    const blogPost = await getDoc(blogPostRef);
+    const blogPost = getDoc(blogPostRef);
 
     if (docSnap.exists()) {
         res.send("Document data : " + blogPost.data());
