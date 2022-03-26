@@ -1,5 +1,5 @@
-import {initializeApp} from "firebase/app"
-import {doc, getDoc, getFirestore} from "firebase/firestore"
+import {initializeApp} from "firebase/app";
+import {doc, getDoc, getFirestore} from "firebase/firestore";
 
 var express = require("express");
 var http = require("http");
