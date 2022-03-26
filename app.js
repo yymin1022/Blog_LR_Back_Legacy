@@ -29,19 +29,21 @@ app.post("/getPostList", async function(req, res){
     console.log("DATA : " + req.body);
 
     let {postType} = req.body;
-    let postList = {};
+    let postListCollection = "";
 
     switch(postType){
         case "blog":
-            postList = await getDocs(collection(firestoreDB, "Blog Post"));
+            postListCollection = "Blog Post";
             break;
         case "project":
-            postList = await getDocs(collection(firestoreDB, "Project Post"));
+            postListCollection = "Project Post";
             break;
         case "solving":
-            postList = await getDocs(collection(firestoreDB, "Solving Post"));
+            postListCollection = "Solving Post";
             break;
     }
+
+    let postList = await getDocs(collection(firestoreDB, postListCollection));
 
     if(postList !== undefined){
         postList.forEach((postData) => {
