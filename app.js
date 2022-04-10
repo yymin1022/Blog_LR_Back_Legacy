@@ -76,11 +76,31 @@ app.post("/getPostList", async function(req, res){
 });
 
 app.post("/getPostData", function(req, res){
+    let resultCode = 200;
+    let resultData = {};
+    let resultMsg = "Success";
+
+    let postContent = "";
     let postID = req.body.postID;
     let postType = req.body.postType;
     let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`
 
-    res.send(postDir);
+    fs.readFile(`${postDir}/post.md`, "utf8", (err, fileContent) => {
+        if(err){
+            resultCode = 100;
+            resultMsg = err;
+        }else{
+            postContent = fileContent;
+        }
+    });
+    
+    resultData.RESULT_CODE = resultCode;
+    resultData.RESULT_MSG = resultMsg;
+    resultData.RESULT_DATA = {
+        PostContent: postContent;
+    };
+
+    res.send(resultData);
 });
 
 server.listen(8080, "0.0.0.0", function(){
