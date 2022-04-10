@@ -79,7 +79,7 @@ app.post("/getPostById", function(req, res){
     let postType = req.body.postType;
     let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`
 
-    res.send(postID);
+    res.send(postDir);
 });
 
 server.listen(8080, "0.0.0.0", function(){
