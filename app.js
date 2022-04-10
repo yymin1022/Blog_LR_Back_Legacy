@@ -97,7 +97,7 @@ app.post("/getPostData", function(req, res){
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
     resultData.RESULT_DATA = {
-        PostContent: postContent;
+        PostContent: postContent
     };
 
     res.send(resultData);
