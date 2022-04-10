@@ -74,7 +74,7 @@ app.post("/getPostList", async function(req, res){
     res.send(resultData);
 });
 
-app.post("/getPostById", function(req, res){
+app.post("/getPostData", function(req, res){
     let postID = req.body.postID;
     let postType = req.body.postType;
     let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`
