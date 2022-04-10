@@ -85,14 +85,7 @@ app.post("/getPostData", function(req, res){
     let postType = req.body.postType;
     let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`
 
-    fs.readFile(`${postDir}/post.md`, "utf8", (err, fileContent) => {
-        if(err){
-            resultCode = 100;
-            resultMsg = err;
-        }else{
-            postContent = fileContent;
-        }
-    });
+    postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
     
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
