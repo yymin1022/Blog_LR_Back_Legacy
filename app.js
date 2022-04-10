@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import fs from "fs";
 import http from "http";
 
 import {initializeApp} from "firebase/app";
@@ -71,6 +72,27 @@ app.post("/getPostList", async function(req, res){
         PostCount: postCount,
         PostList: postList
     };
+    res.send(resultData);
+});
+
+app.post("/getPostData", function(req, res){
+    let resultCode = 200;
+    let resultData = {};
+    let resultMsg = "Success";
+
+    let postContent = "";
+    let postID = req.body.postID;
+    let postType = req.body.postType;
+    let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`
+
+    postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
+    
+    resultData.RESULT_CODE = resultCode;
+    resultData.RESULT_MSG = resultMsg;
+    resultData.RESULT_DATA = {
+        PostContent: postContent
+    };
+
     res.send(resultData);
 });
 
