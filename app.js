@@ -105,14 +105,26 @@ app.post("/getPostImage", function(req, res){
     let postType = req.body.postType;
     let srcID = req.body.srcID;
 
-    let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
-    let srcData = Buffer.from(`${srcDir}/${srcID}`, "base64");
+    try{
+        let tempData = fs.readFileSync(`${postDir}/post.md`,"utf8");
 
-    res.writeHead(200, {
-        "Content-Type": "image/png",
-        "Content-Length": srcData.length
-    });
-    res.end(srcData);
+        let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
+        let srcData = Buffer.from(`${srcDir}/${srcID}`, "base64");
+        
+        res.writeHead(200, {
+            "Content-Type": "image/png",
+            "Content-Length": srcData.length
+        });
+        res.end(srcData);
+    }catch(error){
+        resultCode = 100;
+        resultMsg = "An Error has Occurred";
+
+        resultData.RESULT_CODE = resultCode;
+        resultData.RESULT_MSG = resultMsg;
+        res.send(resultData);
+    }
+    
 })
 
 server.listen(8080, "0.0.0.0", function(){
