@@ -104,7 +104,7 @@ app.post("/getPostImage", function(req, res){
     let postID = req.body.postID;
     let postType = req.body.postType;
     let srcData = "";
-    let srcID = "";
+    let srcDir = "";
     let srcID = req.body.srcID;
 
     try{
