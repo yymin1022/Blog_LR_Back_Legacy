@@ -103,13 +103,15 @@ app.post("/getPostImage", function(req, res){
     
     let postID = req.body.postID;
     let postType = req.body.postType;
+    let srcData = "";
+    let srcID = "";
     let srcID = req.body.srcID;
 
     try{
         let tempData = fs.readFileSync(`${postDir}/post.md`,"utf8");
 
-        let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
-        let srcData = Buffer.from(`${srcDir}/${srcID}`, "base64");
+        srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
+        srcData = Buffer.from(`${srcDir}/${srcID}`, "base64");
         
         res.writeHead(200, {
             "Content-Type": "image/png",
