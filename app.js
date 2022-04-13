@@ -118,7 +118,7 @@ app.post("/getPostImage", function(req, res){
         res.end(srcData);
     }catch(error){
         resultCode = 100;
-        resultMsg = "An Error has Occurred";
+        resultMsg = error.code;
 
         resultData.RESULT_CODE = resultCode;
         resultData.RESULT_MSG = resultMsg;
