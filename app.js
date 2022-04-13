@@ -118,7 +118,7 @@ app.post("/getPostImage", function(req, res){
         res.end(srcData);
     }catch(error){
         resultCode = 100;
-        resultMsg = process.cwd();
+        resultMsg = srcData.toString();
 
         resultData.RESULT_CODE = resultCode;
         resultData.RESULT_MSG = resultMsg;
