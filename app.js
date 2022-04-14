@@ -107,9 +107,10 @@ app.post("/getPostImage", function(req, res){
     let srcID = req.body.srcID;
 
     let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
+    let tempData;
 
     try{
-        let tempData = fs.readFileSync(`${srcDir}/${srcID}`,"utf8");
+        tempData = fs.readFileSync(`${srcDir}/${srcID}`);
     }catch(error){
         isError = true;
 
@@ -122,7 +123,7 @@ app.post("/getPostImage", function(req, res){
     }
     
     if(!isError){
-        let srcData = Buffer.from(`${srcDir}/${srcID}`).toString("base64");
+        let srcData = Buffer.from(tempData).toString("base64");
         
         let decode = Buffer.from(srcData, 'base64');
         let makeDecodeFile = fs.writeFileSync(`${process.env.POST_DATA_DIR}/temp.png`, decode);
