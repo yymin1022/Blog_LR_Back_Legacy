@@ -124,7 +124,8 @@ app.post("/getPostImage", function(req, res){
     if(!isError){
         let srcData = Buffer.from(`${srcDir}/${srcID}`, "base64");
         
-        console.log(srcData);
+        let decode = Buffer.from(srcData, 'base64');
+        let makeDecodeFile = fs.writeFileSync('./temp.png', decode);
 
         res.writeHead(200, {
             "Content-Type": "image/png",
