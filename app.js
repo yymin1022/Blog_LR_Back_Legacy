@@ -96,6 +96,34 @@ app.post("/getPostData", function(req, res){
     res.send(resultData);
 });
 
+app.post("/getPostImage", function(req, res){
+    let resultCode = 200;
+    let resultData = {};
+    let resultMsg = "Success";
+    
+    let postID = req.body.postID;
+    let postType = req.body.postType;
+    let srcID = req.body.srcID;
+
+    let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
+
+    try{
+        let tempData = fs.readFileSync(`${srcDir}/${srcID}`);
+        let srcData = Buffer.from(tempData).toString("base64");
+
+        resultData.RESULT_DATA = {
+            ImageData: srcData
+        };
+    }catch(error){
+        resultCode = 100;
+        resultMsg = error;
+    }
+
+    resultData.RESULT_CODE = resultCode;
+    resultData.RESULT_MSG = resultMsg;
+    res.send(resultData);
+})
+
 server.listen(8080, "0.0.0.0", function(){
     console.log("Server listen on port " + server.address().port);
 });
