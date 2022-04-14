@@ -124,6 +124,8 @@ app.post("/getPostImage", function(req, res){
     if(!isError){
         let srcData = Buffer.from(`${srcDir}/${srcID}`, "base64");
         
+        console.log(srcData);
+
         res.writeHead(200, {
             "Content-Type": "image/png",
             "Content-Length": srcData.length
