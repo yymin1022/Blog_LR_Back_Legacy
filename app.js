@@ -106,8 +106,10 @@ app.post("/getPostImage", function(req, res){
     let postType = req.body.postType;
     let srcID = req.body.srcID;
 
+    let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
+
     try{
-        let tempData = fs.readFileSync(`${postDir}/post.md`,"utf8");
+        let tempData = fs.readFileSync(srcDir,"utf8");
     }catch(error){
         isError = true;
 
@@ -120,7 +122,6 @@ app.post("/getPostImage", function(req, res){
     }
     
     if(!isError){
-        let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
         let srcData = Buffer.from(`${srcDir}/${srcID}`, "base64");
         
         res.writeHead(200, {
