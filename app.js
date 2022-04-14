@@ -112,7 +112,7 @@ app.post("/getPostImage", function(req, res){
         let srcData = Buffer.from(tempData).toString("base64");
 
         resultData.RESULT_DATA = {
-            SrcContent: srcData
+            ImageData: srcData
         };
     }catch(error){
         resultCode = 100;
