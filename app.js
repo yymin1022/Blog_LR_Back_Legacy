@@ -109,7 +109,7 @@ app.post("/getPostImage", function(req, res){
     let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
 
     try{
-        let tempData = fs.readFileSync(srcDir,"utf8");
+        let tempData = fs.readFileSync(`${srcDir}/${srcID}`,"utf8");
     }catch(error){
         isError = true;
 
