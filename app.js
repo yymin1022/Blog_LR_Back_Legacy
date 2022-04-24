@@ -7,6 +7,7 @@ import http from "http";
 import {initializeApp} from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore";
 
+const corsAllow = [process.env.URL_EXTERNAL, process.env.URL_EXTERNAL_TEST, process.env.URL_INTERNAL]
 const corsOption = {
     origin: (origin, callback) => {
         if(origin == process.env.URL_INTERNAL || origin == process.env.URL_EXTERNAL){
