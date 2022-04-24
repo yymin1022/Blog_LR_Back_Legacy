@@ -10,7 +10,7 @@ import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore
 const corsAllow = [process.env.URL_EXTERNAL, process.env.URL_EXTERNAL_TEST, process.env.URL_INTERNAL]
 const corsOption = {
     origin: (origin, callback) => {
-        if(origin == process.env.URL_INTERNAL || origin == process.env.URL_EXTERNAL){
+        if(corsAllow.indexOf(origin) != -1){
             callback(null, true);
         }else{
             callback(new Error("Not Allowed Origin by CORS Policy"));
