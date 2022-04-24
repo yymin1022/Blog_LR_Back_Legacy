@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
@@ -6,8 +7,19 @@ import http from "http";
 import {initializeApp} from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore";
 
+const corsOption = {
+    origin: (origin, callback) => {
+        if(origin == process.env.URL_INTERNAL || origin == process.env.URL_EXTERNAL){
+            callback(null, true);
+        }else{
+            callback(new Error("Not Allowed Origin by CORS Policy"));
+        }
+    }
+};
+
 let app = express();
 let server = http.createServer(app);
+app.use(cors(corsOption));
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 dotenv.config();
