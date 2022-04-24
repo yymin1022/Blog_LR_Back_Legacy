@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
@@ -8,6 +9,7 @@ import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore
 
 let app = express();
 let server = http.createServer(app);
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 dotenv.config();
