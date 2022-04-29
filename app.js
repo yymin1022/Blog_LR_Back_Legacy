@@ -105,14 +105,18 @@ app.post("/getPostData", async function(req, res){
     const postDocData = await getDoc(doc(firestoreDB, postCollection, postID));
 
     if(postDocData.exists()) {
-        console.log("Document data:", postDocData.data());
+        postDate = postDocData.data().date;
+        postIsPinned = postDocData.data().isPinned;
+        postTag = postDocData.data().tag;
+        postTitle = postDocData.data().title;
+        postURL = postDocData.data().url;
     }else{
         console.log("No such document!");
     }
 
     let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postURL}`
 
-    // postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
+    postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
     
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
