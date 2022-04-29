@@ -77,7 +77,7 @@ app.post("/getPostList", async function(req, res){
     res.send(resultData);
 });
 
-app.post("/getPostData", function(req, res){
+app.post("/getPostData", async function(req, res){
     let resultCode = 200;
     let resultData = {};
     let resultMsg = "Success";
