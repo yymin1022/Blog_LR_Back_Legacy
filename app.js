@@ -89,9 +89,7 @@ app.post("/getPostData", async function(req, res){
     let postIsPinned = "";
     let postTag = "";
     let postType = req.body.postType;
-    let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`
-
-    postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
+    let postURL = "";
 
     switch(postType){
         case "blog":
@@ -111,6 +109,10 @@ app.post("/getPostData", async function(req, res){
     }else{
         console.log("No such document!");
     }
+
+    let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postURL}`
+
+    // postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
     
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
