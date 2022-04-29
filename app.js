@@ -88,6 +88,7 @@ app.post("/getPostData", async function(req, res){
     let postID = req.body.postID;
     let postIsPinned = "";
     let postTag = "";
+    let postTitle = "";
     let postType = req.body.postType;
     let postURL = "";
 
