@@ -85,6 +85,7 @@ app.post("/getPostData", async function(req, res){
     let postCollection = "";
     let postContent = "";
     let postDate = "";
+    let postDir = "";
     let postID = req.body.postID;
     let postIsPinned = "";
     let postTag = "";
@@ -103,27 +104,26 @@ app.post("/getPostData", async function(req, res){
             postCollection = "Solving Post";
             break;
     }
-    const postDocData = await getDoc(doc(firestoreDB, postCollection, postID));
 
+    const postDocData = await getDoc(doc(firestoreDB, postCollection, postID));
     if(postDocData.exists()) {
         postDate = postDocData.data().date;
         postIsPinned = postDocData.data().isPinned;
         postTag = postDocData.data().tag;
         postTitle = postDocData.data().title;
         postURL = postDocData.data().url;
+
+        postDir = `${process.env.POST_DATA_DIR}/${postType}/${postURL}`
+        postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
     }else{
-        console.log("No such document!");
+        postContent = "No such Post";
     }
-
-    let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postURL}`
-
-    postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
     
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
     resultData.RESULT_DATA = {
         PostContent: postContent,
-        postDate: postDate,
+        PostDate: postDate,
         PostIsPinned: postIsPinned,
         PostTag: postTag,
         PostTitle: postTitle,
