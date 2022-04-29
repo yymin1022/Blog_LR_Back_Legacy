@@ -121,7 +121,12 @@ app.post("/getPostData", async function(req, res){
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
     resultData.RESULT_DATA = {
-        PostContent: postContent
+        PostContent: postContent,
+        postDate: postDate,
+        PostIsPinned: postIsPinned,
+        PostTag: postTag,
+        PostTitle: postTitle,
+        PostURL: postURL
     };
 
     res.send(resultData);
