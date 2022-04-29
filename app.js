@@ -104,8 +104,7 @@ app.post("/getPostData", async function(req, res){
             postCollection = "Solving Post";
             break;
     }
-    const postDoc = doc(db, postCollection, postID);
-    const postDocData = await getDoc(postDoc);
+    const postDocData = await getDoc(doc(firestoreDB, postCollection, postID));
 
     if(postDocData.exists()) {
         console.log("Document data:", postDocData.data());
