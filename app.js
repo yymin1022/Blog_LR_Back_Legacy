@@ -82,7 +82,7 @@ app.post("/getPostData", function(req, res){
     let resultData = {};
     let resultMsg = "Success";
 
-    let postcollection = "";
+    let postCollection = "";
     let postContent = "";
     let postDate = "";
     let postID = req.body.postID;
