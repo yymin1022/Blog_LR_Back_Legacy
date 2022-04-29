@@ -77,22 +77,57 @@ app.post("/getPostList", async function(req, res){
     res.send(resultData);
 });
 
-app.post("/getPostData", function(req, res){
+app.post("/getPostData", async function(req, res){
     let resultCode = 200;
     let resultData = {};
     let resultMsg = "Success";
 
+    let postCollection = "";
     let postContent = "";
+    let postDate = "";
+    let postDir = "";
     let postID = req.body.postID;
+    let postIsPinned = "";
+    let postTag = "";
+    let postTitle = "";
     let postType = req.body.postType;
-    let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`
+    let postURL = "";
 
-    postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
+    switch(postType){
+        case "blog":
+            postCollection = "Blog Post";
+            break;
+        case "project":
+            postCollection = "Project Post";
+            break;
+        case "solving":
+            postCollection = "Solving Post";
+            break;
+    }
+
+    const postDocData = await getDoc(doc(firestoreDB, postCollection, postID));
+    if(postDocData.exists()) {
+        postDate = postDocData.data().date;
+        postIsPinned = postDocData.data().isPinned;
+        postTag = postDocData.data().tag;
+        postTitle = postDocData.data().title;
+        postURL = postDocData.data().url;
+
+        postDir = `${process.env.POST_DATA_DIR}/${postType}/${postURL}`
+        postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
+    }else{
+        postContent = "No such Post";
+    }
     
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
     resultData.RESULT_DATA = {
-        PostContent: postContent
+        PostContent: postContent,
+        PostDate: postDate,
+        PostIsPinned: postIsPinned,
+        PostTag: postTag,
+        PostTitle: postTitle,
+        PostURL: postURL
     };
 
     res.send(resultData);
