@@ -82,12 +82,36 @@ app.post("/getPostData", function(req, res){
     let resultData = {};
     let resultMsg = "Success";
 
+    let postcollection = "";
     let postContent = "";
+    let postDate = "";
     let postID = req.body.postID;
+    let postIsPinned = "";
+    let postTag = "";
     let postType = req.body.postType;
     let postDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`
 
     postContent = fs.readFileSync(`${postDir}/post.md`,"utf8");
+
+    switch(postType){
+        case "blog":
+            postCollection = "Blog Post";
+            break;
+        case "project":
+            postCollection = "Project Post";
+            break;
+        case "solving":
+            postCollection = "Solving Post";
+            break;
+    }
+    const postDoc = doc(db, postCollection, postID);
+    const postDocData = await getDoc(postDoc);
+
+    if(postDocData.exists()) {
+        console.log("Document data:", postDocData.data());
+    }else{
+        console.log("No such document!");
+    }
     
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
