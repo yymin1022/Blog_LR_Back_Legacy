@@ -9,9 +9,21 @@ import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore
 
 let app = express();
 let server = http.createServer(app);
-app.use(cors());
+const corsList = [process.env.URL_DEV, process.env.URL_PUB];
+const corsOptions = {
+    origin: function (origin, callback){
+        if(corsList.indexOf(origin) !== -1){
+            callback(null, true);
+        }else{
+            callback(new Error("Not Allowed Origin!"));
+        }
+    },
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
+
 dotenv.config();
 
 const firebaseConfig = {
