@@ -40,29 +40,16 @@ app.get("/", function(req, res){
 });
 
 app.post("/getPostList", async function(req, res){
-    let postCollection = "";
     let postCount = 0;
     let postList = [];
     let postType = req.body.postType;
-
-    switch(postType){
-        case "blog":
-            postCollection = "Blog Post";
-            break;
-        case "project":
-            postCollection = "Project Post";
-            break;
-        case "solving":
-            postCollection = "Solving Post";
-            break;
-    }
 
     let resultCode = 200;
     let resultData = {};
     let resultMsg = "Success";
 
     if(postCollection !== ""){
-        let postCollectionList = await getDocs(collection(firestoreDB, postCollection));
+        let postCollectionList = await getDocs(collection(firestoreDB, postType]));
         postCollectionList.forEach((curData) => {
             postCount++;
             let postData = {
@@ -94,7 +81,6 @@ app.post("/getPostData", async function(req, res){
     let resultData = {};
     let resultMsg = "Success";
 
-    let postCollection = "";
     let postContent = "";
     let postDate = "";
     let postDir = "";
@@ -105,19 +91,7 @@ app.post("/getPostData", async function(req, res){
     let postType = req.body.postType;
     let postURL = "";
 
-    switch(postType){
-        case "blog":
-            postCollection = "Blog Post";
-            break;
-        case "project":
-            postCollection = "Project Post";
-            break;
-        case "solving":
-            postCollection = "Solving Post";
-            break;
-    }
-
-    const postDocData = await getDoc(doc(firestoreDB, postCollection, postID));
+    const postDocData = await getDoc(doc(firestoreDB, postType, postID));
     if(postDocData.exists()) {
         postDate = postDocData.data().date;
         postIsPinned = postDocData.data().isPinned;
