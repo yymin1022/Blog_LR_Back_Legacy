@@ -94,7 +94,6 @@ app.post("/getPostData", async function(req, res){
     let resultData = {};
     let resultMsg = "Success";
 
-    let postCollection = "";
     let postContent = "";
     let postDate = "";
     let postDir = "";
@@ -105,19 +104,7 @@ app.post("/getPostData", async function(req, res){
     let postType = req.body.postType;
     let postURL = "";
 
-    switch(postType){
-        case "blog":
-            postCollection = "Blog Post";
-            break;
-        case "project":
-            postCollection = "Project Post";
-            break;
-        case "solving":
-            postCollection = "Solving Post";
-            break;
-    }
-
-    const postDocData = await getDoc(doc(firestoreDB, postCollection, postID));
+    const postDocData = await getDoc(doc(firestoreDB, postType, postID));
     if(postDocData.exists()) {
         postDate = postDocData.data().date;
         postIsPinned = postDocData.data().isPinned;
