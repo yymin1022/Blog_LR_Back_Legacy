@@ -48,24 +48,19 @@ app.post("/getPostList", async function(req, res){
     let resultData = {};
     let resultMsg = "Success";
 
-    if(postCollection !== ""){
-        let postCollectionList = await getDocs(collection(firestoreDB, postType));
-        postCollectionList.forEach((curData) => {
-            postCount++;
-            let postData = {
-                "postDate": curData.get("date"),
-                "postID": curData.id,
-                "postIsPinned": curData.get("isPinned"),
-                "postTag": curData.get("tag"),
-                "postTitle": curData.get("title"),
-                "postURL": curData.get("url"),
-            };
-            postList.push(postData);
-        });
-    }else{
-        resultCode = 100;
-        resultMsg = "An Error has Occurred";
-    }
+    let postCollectionList = await getDocs(collection(firestoreDB, postType));
+    postCollectionList.forEach((curData) => {
+        postCount++;
+        let postData = {
+            "postDate": curData.get("date"),
+            "postID": curData.id,
+            "postIsPinned": curData.get("isPinned"),
+            "postTag": curData.get("tag"),
+            "postTitle": curData.get("title"),
+            "postURL": curData.get("url"),
+        };
+        postList.push(postData);
+    });
     
     resultData.RESULT_CODE = resultCode;
     resultData.RESULT_MSG = resultMsg;
