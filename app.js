@@ -40,29 +40,16 @@ app.get("/", function(req, res){
 });
 
 app.post("/getPostList", async function(req, res){
-    let postCollection = "";
     let postCount = 0;
     let postList = [];
     let postType = req.body.postType;
-
-    switch(postType){
-        case "blog":
-            postCollection = "Blog Post";
-            break;
-        case "project":
-            postCollection = "Project Post";
-            break;
-        case "solving":
-            postCollection = "Solving Post";
-            break;
-    }
 
     let resultCode = 200;
     let resultData = {};
     let resultMsg = "Success";
 
     if(postCollection !== ""){
-        let postCollectionList = await getDocs(collection(firestoreDB, postCollection));
+        let postCollectionList = await getDocs(collection(firestoreDB, postType]));
         postCollectionList.forEach((curData) => {
             postCount++;
             let postData = {
