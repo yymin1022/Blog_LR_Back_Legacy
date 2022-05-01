@@ -5,7 +5,7 @@ import fs from "fs";
 import http from "http";
 
 import {initializeApp} from "firebase/app";
-import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, getFirestore, query} from "firebase/firestore";
 
 dotenv.config();
 
