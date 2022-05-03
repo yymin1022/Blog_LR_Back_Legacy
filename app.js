@@ -123,7 +123,12 @@ app.post("/getPostImage", function(req, res){
     let postType = req.body.postType;
     let srcID = req.body.srcID;
 
-    let srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
+    let srcDir = "";
+    if(postType != "solving"){
+        srcDir = `${process.env.POST_DATA_DIR}/${postType}/${postID}`;
+    }else{
+        srcDir = `${process.env.POST_DATA_DIR}/${postType}`;
+    }
 
     try{
         let tempData = fs.readFileSync(`${srcDir}/${srcID}`);
