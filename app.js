@@ -13,7 +13,7 @@ let app = express();
 let server = http.createServer(app);
 const corsList = [process.env.URL_DEV, process.env.URL_PUB];
 const corsOptions = {
-    origin: function (origin, callback){
+    origin: (origin, callback) => {
         if(corsList.indexOf(origin) !== -1){
             callback(null, true);
         }else{
